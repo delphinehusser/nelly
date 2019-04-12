@@ -161,6 +161,7 @@ void mangeRenard(Animal &a){
     }
   } else {
   cout << "Ce renard est mort..." << endl;
+  }  
 }
 
 void faimRenard(Animal &a){
