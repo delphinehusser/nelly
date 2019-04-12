@@ -24,15 +24,15 @@ int main() {
   
   // on construit un exemple d'ensemble
   Ens exemple = creerEns();
-  ajouteEns(exemple, c1);
-  ajouteEns(exemple, c2);
-  ajouteEns(exemple, c3);
-  afficheEns(exemple);
+  ajouteEc(exemple, c1);
+  ajouteEc(exemple, c2);
+  ajouteEc(exemple, c3);
+  afficheEc(exemple);
   
   // on ajoute encore un élément
   cout << "Ajout d'un élément :" << endl;
-  ajouteEns(exemple, creerCoord(4,0));
-  afficheEns(exemple);
+  ajouteEc(exemple, creerCoord(4,0));
+  afficheEc(exemple);
 
   return 0;
 }
