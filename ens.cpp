@@ -113,6 +113,13 @@ Coord randomEC(Ens ec){
   return c;
 }
 
+// SUPPRIME UNE COORDONNEE D'UN ENSEMBLE //
+
+/*Ens supprimeEc(Ens ec, Coord c){
+  return ec;
+}
+*/
+
 
 
 
