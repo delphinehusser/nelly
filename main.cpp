@@ -9,6 +9,9 @@
 
 using namespace std;
 
+/** Infrastructure minimale de test **/
+#define ASSERT(test) if (!(test)) cout << "Test failed in file " << __FILE__ << " line " << __LINE__ << ": " #test << endl
+
 int main() {
   Coord c1 = creerCoord(2,1);
   afficheCoord(c1);
