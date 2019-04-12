@@ -101,4 +101,18 @@ Ens trouverVoisin(Coord c){
 }
 
 
+// RETOURNE UNE COORDONNEE AU HASARD PARMI UN ENSEMBLE //
+
+Coord randomEC(Ens ec){
+  Coord c;
+  int abs, ord;
+  abs = rand();// pour obtenir un nombre aléatoire entre 0 et n (compris), il faut appliquer un modulo (n+1) au résultat de l'appel à rand()
+  ord = rand();// idem
+  c.x = abs;
+  c.y = ord;
+  return c;
+}
+
+
+
 
