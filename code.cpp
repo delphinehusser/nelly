@@ -209,7 +209,7 @@ bool seReproduitAnimal (Animal a, int v){
 void grilleVide (Grille &g){
   for (int i = 0; i < GRILLE_TAILLE; i++){
     for (int j = 0; j < GRILLE_TAILLE; j++){
-      g.case[i][j] = 0;
+      g.caseG[i][j] = 0;
     }  
   }
 }
@@ -219,7 +219,7 @@ void grilleVide (Grille &g){
 void copieGrille (Grille g1, Grille &g2){
   for (int i = 0; i < GRILLE_TAILLE; i++){
     for (int j = 0; j < GRILLE_TAILLE; j++){
-      g1.case[i][j] = g2.case[i][j];
+      g1.caseG[i][j] = g2.caseG[i][j];
     }  
   }
 }
@@ -228,12 +228,12 @@ void copieGrille (Grille g1, Grille &g2){
          
 Animal getAnimal (Grille g, Coord c){
   Animal copie;
-  return copie = g.case[c.x][c.y];
+  return copie = g.caseG[c.x][c.y];
 }
           
 // RANGE UN ANIMAL A SA PLACE DANS LA GRILLE //
 
 void setAnimal (Grille &g, Animal a){
-  g.case[a.ou.x][a.ou.y] = a;
+  g.caseG[a.ou.x][a.ou.y] = a;
 }  
           
