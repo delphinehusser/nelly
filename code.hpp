@@ -22,7 +22,7 @@ struct Animal{
 };
 
 struct Grille{
-  Animal case[GRILLE_TAILLE][GRILLE_TAILLE];
+  Animal caseG[GRILLE_TAILLE][GRILLE_TAILLE];
 };
 
 // VARIABLES GLOBALES //
