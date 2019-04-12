@@ -13,6 +13,24 @@ using namespace std;
 #define ASSERT(test) if (!(test)) cout << "Test failed in file " << __FILE__ << " line " << __LINE__ << ": " #test << endl
 
 
+// CREER UN ENSEMBLE DE COORDONNEES //
+
+Ens creerEc(){
+  Ens ec;
+  ec.point[] = 0;
+  ec.nbPoint = 0;
+}
+
+// AFFICHE UN ENSEMBLE DE COORDONNEES //
+
+void afficheEc(Ens ec){
+  cout << L'ensemble contient: ";
+  for (int i = 0; i < ec.nbPoint; i++){
+    afficheCoord(ec.point[i]);
+    cout << " ";
+  }
+}
+
 // ENS VIDE //
 
 void ensVide(Ens &ec){
@@ -25,6 +43,12 @@ void ensVide(Ens &ec){
 void ajouteEc(Ens &ec, Coord c){
   ec.point[nbPoint] = c;
   ec.nbPoint++;
+}
+
+// RETOURNE LE NOMBRE DE POINT DANS L'ENSEMBLE //
+
+int cardEc(Ens ec){
+  return ec.nbPoint;
 }
 
 // EST VIDE //
