@@ -206,10 +206,32 @@ bool seReproduitAnimal (Animal a, int v){
           
 // INITIALISE UNE GRILLE VIDE //
           
-void grilleVide ( Grille &g ){
+void grilleVide (Grille &g){
   for (int i = 0; i < GRILLE_TAILLE; i++){
     for (int j = 0; j < GRILLE_TAILLE; j++){
       g.case[i][j] = 0;
     }  
   }
 }
+          
+// COPIE UNE GRILLE G1 DANS UNE GRILLE G2 //  
+          
+void copieGrille (Grille g1, Grille &g2){
+  for (int i = 0; i < GRILLE_TAILLE; i++){
+    for (int j = 0; j < GRILLE_TAILLE; j++){
+      g1.case[i][j] = g2.case[i][j];
+    }  
+  }
+}
+          
+// RENVOIE LA COPIE L'ANIMAL DANS UNE CASE DE LA GRILLE //  
+         
+Animal getAnimal (Grille g, Coord c){
+  Animal copie;
+  return copie = g.case[c.x][c.y];
+}
+          
+// //
+
+          
+          
