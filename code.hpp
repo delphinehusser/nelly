@@ -47,7 +47,10 @@ int getY(coord c);//
 bool egalCoord(Coord c1, Coord c2);//
 //costructeur
 void ensVide(Ens ec);//
+void afficheEc(Ens ec);
+Ens creerEc();
 void ajouteEc(Ens ec,Coord c);//
+int cardEc(Ens ec);
 //test
 bool estVide(Ens ec);//
 bool estDans(Ens ec, Coord c);//
