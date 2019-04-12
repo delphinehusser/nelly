@@ -8,7 +8,6 @@ using namespace std;
 struct Coord{
   int x;
   int y;
-  Espece e;
 };
 
 struct Ens {
@@ -17,9 +16,13 @@ struct Ens {
 };
 
 struct Animal{
-  coord ou;
+  Coord ou;
   Espece quoi;
   int food;
+};
+
+struct Grille{
+  Animal case[GRILLE_TAILLE][GRILLE_TAILLE];
 };
 
 // VARIABLES GLOBALES //
@@ -55,9 +58,12 @@ Animal creerAnimal(Espece e,Coord c);//
 Coord CoordAnimal (Animal a);//
 Espece especeAnimal(Animal a);//
 int nourritureRenard(Animal a);
-bool estVide(Coord c);
-void changeCoordAnimal (Animal &a,Coord c);
-void mangeRenard(Animal &a);
-void faimRenard(Animal& a);
-bool mortAnimal(Animal a);
-bool sereproduitAnimal (Animal a,int v);
+bool estVide(Coord c);//
+void changeCoordAnimal (Animal &a,Coord c);//
+void mangeRenard(Animal &a);//
+void faimRenard(Animal& a);//
+bool mortAnimal(Animal a);//
+bool sereproduitAnimal (Animal a,int v);//
+void grilleVide( Grille &g);//
+void copieGrille (Grille g1, Grille & g2 );//
+
