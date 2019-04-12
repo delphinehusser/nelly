@@ -67,6 +67,7 @@ bool sereproduitAnimal (Animal a,int v);//
 void grilleVide( Grille &g);//
 void copieGrille (Grille g1, Grille & g2 );//
 Animal getAnimal ( Grille g,Coord c);//
+void setAnimal (Grille &g,Animal a);
 
 
 
