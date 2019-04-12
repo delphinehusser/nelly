@@ -203,3 +203,13 @@ bool seReproduitAnimal (Animal a, int v){
     }
   }
 }
+          
+// INITIALISE UNE GRILLE VIDE //
+          
+void grilleVide ( Grille &g ){
+  for (int i = 0; i < GRILLE_TAILLE; i++){
+    for (int j = 0; j < GRILLE_TAILLE; j++){
+      g.case[i][j] = 0;
+    }  
+  }
+}
