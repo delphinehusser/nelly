@@ -233,5 +233,7 @@ Animal getAnimal (Grille g, Coord c){
           
 // //
 
-          
+void setAnimal (Grille &g, Animal a){
+  g.case[a.ou.x][a.ou.y] = a;
+}  
           
