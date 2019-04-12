@@ -9,6 +9,9 @@
 
 using namespace std;
 
+/** Infrastructure minimale de test **/
+#define ASSERT(test) if (!(test)) cout << "Test failed in file " << __FILE__ << " line " << __LINE__ << ": " #test << endl
+
 
 // CREER COORD //
 
@@ -31,6 +34,11 @@ bool egalCoord(Coord c1, Coord c2){
     }
   }
   return false;
+}
+
+void testEgalCoord(){
+  ASSERT( egalCoord(creerCoord(4,5),creerCoord(4,5)) );
+  ASSERT( egalCoord(creerCoord(3,6),creerCoord(3,6)) );
 }
 
 // GET X //
