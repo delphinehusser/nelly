@@ -26,7 +26,13 @@ int main() {
   Ens exemple = creerEns();
   ajouteEns(exemple, c1);
   ajouteEns(exemple, c2);
+  ajouteEns(exemple, c3);
+  afficheEns(exemple);
   
+  // on ajoute encore un élément
+  cout << "Ajout d'un élément :" << endl;
+  ajouteEns(exemple, creerCoord(4,0));
+  afficheEns(exemple);
 
   return 0;
 }
