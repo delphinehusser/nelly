@@ -14,6 +14,10 @@ Coord creerCoord(int abs, int ord){
   point.y = ord;
 }
 
+void afficheCoord (Coord c){
+  cout << "(" << c.x << "," << c.y << ")" << endl;
+}
+
 // EGAL COORD //
 
 bool egalCoord(Coord c1, Coord c2){
