@@ -23,7 +23,7 @@ int main() {
   testEgalCoord();
   
   // on construit un exemple d'ensemble
-  Ens exemple = creerEns();
+  Ens exemple = creerEc();
   ajouteEc(exemple, c1);
   ajouteEc(exemple, c2);
   ajouteEc(exemple, c3);
