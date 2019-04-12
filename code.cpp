@@ -231,7 +231,7 @@ Animal getAnimal (Grille g, Coord c){
   return copie = g.case[c.x][c.y];
 }
           
-// //
+// RANGE UN ANIMAL A SA PLACE DANS LA GRILLE //
 
 void setAnimal (Grille &g, Animal a){
   g.case[a.ou.x][a.ou.y] = a;
