@@ -16,5 +16,7 @@ int main() {
   Coord c1 = creerCoord(2,1);
   afficheCoord(c1);
   cout << endl;
+  
+  testEgalCoord();
   return 0;
 }
