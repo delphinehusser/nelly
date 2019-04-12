@@ -71,32 +71,34 @@ bool estDansEc(Ens ec, Coord c){
 // TROUVER VOISIN //
 
 Ens trouverVoisin(Coord c){
-  int x,y,minx,maxx,nx;
+  int x, y, minx, maxx, nx;
   Ens res;
   ecVide(res);
-  x=getX(c);
-  y=getY(c);
-  if (x==0){
-    minx=x;
+  x = getX(c);
+  y = getY(c);
+  if (x == 0){
+    minx = x;
   }else{
     minx = x-1;
     ajouteEc(res,creerCoord(x-1,y));
   }
-  if(GRILLE_TAILLE== x-1){
-    maxx=x;
+  if(GRILLE_TAILLE == x-1){
+    maxx = x;
   }else{
-    maxx=x+1;
+    maxx = x+1;
     ajouteEc(res,creerCoord(x+1,y));
   }
-  if (y!=0){
-      for(nx=minx;nx<=maxx;nx+1)
+  if (y != 0){
+      for(nx = minx;nx <= maxx; nx+1)
       ajouteEc(res,creerCoord(nx,y-1));
   }
-  if(y!=GRILLE_TAILLE-1){
-    for(nx=minx;nx<=maxx;nx++){
+  if(y != GRILLE_TAILLE-1){
+    for(nx = minx; nx <= maxx; nx++){
       ajouteEc(res,creerCoord(nx,y+1));
     }
   }
   return res;
 }
+
+
 
