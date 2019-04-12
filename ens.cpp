@@ -33,7 +33,7 @@ void afficheEc(Ens ec){
 
 // ENS VIDE //
 
-void ensVide(Ens &ec){
+void ecVide(Ens &ec){
   ec.point[] = 0;
   ec.nbPoint = 0;
 }
@@ -73,7 +73,7 @@ bool estDansEc(Ens ec, Coord c){
 Ens trouverVoisin(Coord c){
   int x,y,minx,maxx,nx;
   Ens res;
-  ensVide(res);
+  ecVide(res);
   x=getX(c);
   y=getY(c);
   if (x==0){
