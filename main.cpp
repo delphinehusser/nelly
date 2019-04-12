@@ -6,4 +6,8 @@ using namespace std;
 #include <chrono>
 
 int main() {
+  Coord c1 = nouvCoord(2,1);
+  afficheCoord(c1);
+  cout << endl;
+  return 0;
 }
