@@ -1,28 +1,31 @@
  
 struct Coord{
-
   int x;
-
   int y;
-
 };
 
 Coord creerCoord(int abs, int ord){
-
   Coord point;
-
   point.x = abs;
-
   point.y = ord;
-
 }
 
+// GET X //
 
+int getX(Coord c){
+  int abs = c.x;
+  return abs;
+}
+
+// GET Y //
+
+int getY(Coord c){
+  int ord = c.y;
+  return ord;
+}
 
 void afficheCoord (Coord c){
-
   cout << "(" << c.x << "," << c.y << ")" << endl;
-
 }
 
 int main(){
