@@ -28,6 +28,11 @@ void afficheCoord (Coord c){
   cout << "(" << c.x << "," << c.y << ")" << endl;
 }
 
+bool testEgalCoord {
+Coord a = creerCoord(1,2);
+ASSERT ( 
+}
+
 int main(){
 coord c1 = nouvCoord(2,1); afficheCoord(c1); 
 cout << endl; return 0; 
