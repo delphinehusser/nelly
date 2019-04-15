@@ -28,14 +28,25 @@ void afficheCoord (Coord c){
   cout << "(" << c.x << "," << c.y << ")" << endl;
 }
 
-bool testEgalCoord {
+bool egalCoord(Coord c1, Coord c2){
+  if (c1.x == c2.x){
+    if (c1.y == c2.y){
+      return true;
+    }
+  }
+  return false;
+}
+
+bool testEgalCoord () {
 Coord a = creerCoord(1,2);
-ASSERT ( 
+Coord b = creerCoord(getX(a),getY(b));
+ASSERT (egalCoord(a,b)==true);
 }
 
 int main(){
 coord c1 = nouvCoord(2,1); afficheCoord(c1); 
 cout << endl; return 0; 
+testEgalCoord();
 }
 
 
