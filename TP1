@@ -7,4 +7,28 @@ struct Coord{
 
 };
 
+Coord creerCoord(int abs, int ord){
+
+  Coord point;
+
+  point.x = abs;
+
+  point.y = ord;
+
+}
+
+
+
+void afficheCoord (Coord c){
+
+  cout << "(" << c.x << "," << c.y << ")" << endl;
+
+}
+
+int main(){
+coord c1 = nouvCoord(2,1); afficheCoord(c1); 
+cout << endl; return 0; 
+}
+
+
 
