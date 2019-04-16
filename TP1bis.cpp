@@ -168,6 +168,7 @@ Coord randomEc(Ens ec){
   return c;
 }
 
+// SUPPRIME EC // 
 
 Ens supprimeEc(Ens &ec, Coord c){
   for (int i = 0; i < ec.nbPoint; i++){
