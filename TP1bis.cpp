@@ -51,8 +51,6 @@ int getX(Coord c){
   return abs;
 }
 
-	
-	
 // GET Y //
 
 int getY(Coord c){
@@ -74,8 +72,6 @@ bool egalCoord(Coord c1, Coord c2){
 
 void testEgalCoord(){
   ASSERT (egalCoord(creerCoord(1,2),creerCoord(1,2)) == true);
-  ASSERT (egalCoord(creerCoord(0,0),creerCoord(0,0)) == true);
- ASSERT (egalCoord(creerCoord(0,0),creerCoord(0,1)) == false);
 }
 
 
@@ -84,7 +80,6 @@ void afficheEc(Ens ec){
     afficheCoord(ec.point[i]);
   }
   cout << "Il y a " << ec.nbPoint << " coordonnées dans cet ensemble." << endl;
-  cout << endl;
 }
 
 // CREER UN ENSEMBLE DE COORDONNES CONTENANT AUCUN ELEMENT //
@@ -108,10 +103,6 @@ void ajouteEc(Ens &ec, Coord c){
   ec.nbPoint++;
 }
 
-// SUPPRIME EC //
-
-
-
 // ENS VIDE //
 
 void ensVide(Ens &ec){
@@ -126,8 +117,7 @@ int cardEc(Ens ec){
 
 Ens trouverVoisin(Coord c){
   int x, y, minx, maxx, nx;
-  Ens res;
-  ensVide(res);
+  Ens res = creerEc();
   x = getX(c);
   y = getY(c);
 
@@ -156,19 +146,30 @@ Ens trouverVoisin(Coord c){
 }
 
 
-Coord randomEC(Ens ec){
+Coord randomEc(Ens ec){
   Coord c;
   int abs, ord;
   abs = rand();
-  abs = abs%(GRILLE_TAILLE+1);// pour obtenir un nombre aléatoire entre 0 et n (compris), il faut appliquer un modulo (n+1) au résultat de l'appel à rand() _ A TESTER
+  abs = abs%(GRILLE_TAILLE+1);//A TESTER
   ord = rand();
   ord = ord%(GRILLE_TAILLE+1);
+  cout << abs << ord << endl;
+
+  for (int i = 0; i < ec.nbPoint; i++){
+    while (egalCoord(creerCoord(abs,ord), ec.point[i]) == false){
+      abs = rand();
+      abs = abs%(GRILLE_TAILLE+1);
+      ord = rand();
+      ord = ord%(GRILLE_TAILLE+1);
+    }
   c.x = abs;
   c.y = ord;
+  }
   return c;
 }
 
-/*Ens supprimeEc(Ens &ec, Coord c){
+
+Ens supprimeEc(Ens &ec, Coord c){
   for (int i = 0; i < ec.nbPoint; i++){
     if (egalCoord(ec.point[i], c)){
       for (int j = i; j < ec.nbPoint; j++){
@@ -181,39 +182,38 @@ Coord randomEC(Ens ec){
     }
   }
   return ec;
-}*/
+}
+
+
 
 
 
 int main(){
 
   Coord c1 = creerCoord(2,1);
-  afficheCoord(c1);
-  cout << endl;
   Coord c2 = creerCoord(3,4);
   Coord c3 = creerCoord(0,0);
-	
-	//TEST GET X ET GET Y //
-	
-	ASSERT(getX(c1)==2);
-	ASSERT(getY(c1)==1);
-	ASSERT(getX(c2)==3);
-	ASSERT(getY(c3)==0);
   
   Ens exemple = creerEc();
-	ASSERT(exemple.nbPoint==0);
   ajouteEc(exemple, c1);
   ajouteEc(exemple, c2);
   ajouteEc(exemple, c3);
   afficheEc(exemple);
-	
-	// TEST AJOUTE EC //
-	
-	ASSERT(exemple[0]==c1);
-	ASSERT(exemple[1]==c2);	
+  cout << endl;
  
   cout << "Ajout d'un élément :" << endl;
   ajouteEc(exemple, creerCoord(4,0));
+  afficheEc(exemple);
+  cout << endl;
+
+  cout << "Choix d'une coordonnée random :" << endl;
+  Coord random;
+  random = randomEc(exemple);
+  afficheCoord(random);
+  cout << endl;
+
+  cout << "Suppression d'un élément :" << endl;
+  supprimeEc(exemple, random);
   afficheEc(exemple);
 
   return 0;
