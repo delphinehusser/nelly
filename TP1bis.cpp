@@ -8,6 +8,11 @@ using namespace std;
 /** Infrastructure minimale de test **/
 #define ASSERT(test) if (!(test)) cout << "Test failed in file " << __FILE__ << " line " << __LINE__ << ": " #test << endl
 
+
+
+const int MAXENSCOORD = 400;
+const int GRILLE_TAILLE = 20;
+
 // CREER COORD //
 
 struct Coord{
@@ -16,11 +21,10 @@ struct Coord{
 };
 
 struct Ens{
-  Coord point[];
+  Coord point[MAXENSCOORD];
   int nbPoint;
 };
 
-int GRILLE_TAILLE = 20;
 
 
 Coord creerCoord(int abs, int ord){
@@ -83,8 +87,11 @@ void afficheEc(Ens ec){
 
 Ens creerEc(){
   Ens ec;
+  for (int i = 0; i < MAXENSCOORD; i++){
+    ec.point[i].x = 0;
+    ec.point[i].y = 0;
+  }
   ec.nbPoint = 0;
-  ec.point[ec.nbPoint] = creerCoord(0,0);
   return ec;
 }
 
@@ -141,17 +148,19 @@ Ens trouverVoisin(Coord c){
 }
 
 
-/*Coord randomEC(Ens ec){
+Coord randomEC(Ens ec){
   Coord c;
   int abs, ord;
-  abs = rand();// pour obtenir un nombre aléatoire entre 0 et n (compris), il faut appliquer un modulo (n+1) au résultat de l'appel à rand()
-  ord = rand();// idem
+  abs = rand();
+  abs = abs%(GRILLE_TAILLE+1);// pour obtenir un nombre aléatoire entre 0 et n (compris), il faut appliquer un modulo (n+1) au résultat de l'appel à rand() _ A TESTER
+  ord = rand();
+  ord = ord%(GRILLE_TAILLE+1);
   c.x = abs;
   c.y = ord;
   return c;
 }
 
-Ens supprimeEc(Ens &ec, Coord c){
+/*Ens supprimeEc(Ens &ec, Coord c){
   for (int i = 0; i < ec.nbPoint; i++){
     if (egalCoord(ec.point[i], c)){
       for (int j = i; j < ec.nbPoint; j++){
@@ -172,19 +181,19 @@ int main(){
 
   Coord c1 = creerCoord(2,1);
   afficheCoord(c1);
-  /*cout << endl;
+  cout << endl;
   Coord c2 = creerCoord(3,4);
-  Coord c3 = creerCoord(0,0);*/
+  Coord c3 = creerCoord(0,0);
   
   Ens exemple = creerEc();
-  /*ajouteEc(exemple, c1);
+  ajouteEc(exemple, c1);
   ajouteEc(exemple, c2);
-  ajouteEc(exemple, c3);*/
+  ajouteEc(exemple, c3);
   afficheEc(exemple);
  
-  /*cout << "Ajout d'un élément :" << endl;
+  cout << "Ajout d'un élément :" << endl;
   ajouteEc(exemple, creerCoord(4,0));
-  afficheEc(exemple);*/
+  afficheEc(exemple);
 
   return 0;
 }
