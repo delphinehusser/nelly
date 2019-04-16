@@ -89,7 +89,7 @@ Ens trouverVoisin(Coord c){
     ajouteEc(res,creerCoord(x+1,y));
   }
   if (y != 0){
-      for(nx = minx;nx <= maxx; nx+1)
+      for(nx = minx;nx <= maxx; nx++)
       ajouteEc(res,creerCoord(nx,y-1));
   }
   if(y != GRILLE_TAILLE-1){
@@ -115,10 +115,21 @@ Coord randomEC(Ens ec){
 
 // SUPPRIME UNE COORDONNEE D'UN ENSEMBLE //
 
-/*Ens supprimeEc(Ens ec, Coord c){
+Ens supprimeEc(Ens &ec, Coord c){
+  for (int i = 0; i < ec.nbPoint; i++){
+    if (egalCoord(ec.point[i], c)){
+      for (int j = i; j < ec.nbPoint; j++){
+	ec.point[j].x = ec.point[j+1].x;
+	ec.point[j].y = ec.point[j+1].y;
+      }
+      ec.point[ec.nbPoint].x = 0;
+      ec.point[ec.nbPoint].y = 0;
+      ec.nbPoint--;
+    }
+  }
   return ec;
 }
-*/
+
 
 
 
