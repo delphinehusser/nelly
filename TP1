@@ -1,4 +1,12 @@
- 
+#include <cstdlib>
+#include <iostream>
+#include <chrono>;
+
+using namespace std;
+
+/** Infrastructure minimale de test **/
+#define ASSERT(test) if (!(test)) cout << "Test failed in file " << __FILE__ << " line " << __LINE__ << ": " #test << endl
+
 struct Coord{
   int x;
   int y;
