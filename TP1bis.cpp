@@ -108,6 +108,10 @@ void ajouteEc(Ens &ec, Coord c){
   ec.nbPoint++;
 }
 
+// SUPPRIME EC //
+
+
+
 // ENS VIDE //
 
 void ensVide(Ens &ec){
@@ -197,6 +201,7 @@ int main(){
 	ASSERT(getY(c3)==0);
   
   Ens exemple = creerEc();
+	ASSERT(exemple.nbPoint==0);
   ajouteEc(exemple, c1);
   ajouteEc(exemple, c2);
   ajouteEc(exemple, c3);
