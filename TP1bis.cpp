@@ -51,6 +51,8 @@ int getX(Coord c){
   return abs;
 }
 
+	
+	
 // GET Y //
 
 int getY(Coord c){
@@ -72,6 +74,8 @@ bool egalCoord(Coord c1, Coord c2){
 
 void testEgalCoord(){
   ASSERT (egalCoord(creerCoord(1,2),creerCoord(1,2)) == true);
+  ASSERT (egalCoord(creerCoord(0,0),creerCoord(0,0)) == true);
+ ASSERT (egalCoord(creerCoord(0,0),creerCoord(0,1)) == false);
 }
 
 
@@ -184,12 +188,24 @@ int main(){
   cout << endl;
   Coord c2 = creerCoord(3,4);
   Coord c3 = creerCoord(0,0);
+	
+	//TEST GET X ET GET Y //
+	
+	ASSERT(getX(c1)==2);
+	ASSERT(getY(c1)==1);
+	ASSERT(getX(c2)==3);
+	ASSERT(getY(c3)==0);
   
   Ens exemple = creerEc();
   ajouteEc(exemple, c1);
   ajouteEc(exemple, c2);
   ajouteEc(exemple, c3);
   afficheEc(exemple);
+	
+	// TEST AJOUTE EC //
+	
+	ASSERT(exemple[0]==c1);
+	ASSERT(exemple[1]==c2);	
  
   cout << "Ajout d'un élément :" << endl;
   ajouteEc(exemple, creerCoord(4,0));
