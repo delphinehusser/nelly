@@ -25,10 +25,15 @@ int GRILLE_TAILLE = 20;
 
 Coord creerCoord(int abs, int ord){
   Coord point;
-  point.x = abs;
-  point.y = ord;
+  if (abs >= 0 and ord >=0){
+    if (abs <= GRILLE_TAILLE and ord <= GRILLE_TAILLE){
+      point.x = abs;
+      point.y = ord;
+    }
+  }
   return point;
 }
+
 
 void afficheCoord(Coord c){
   cout << "(" << c.x << "," << c.y << ")" << endl;
@@ -70,6 +75,7 @@ void afficheEc(Ens ec){
   for (int i = 0; i < ec.nbPoint; i++){
     afficheCoord(ec.point[i]);
   }
+  cout << "Il y a " << ec.nbPoint << " coordonnées dans cet ensemble." << endl;
   cout << endl;
 }
 
@@ -78,6 +84,7 @@ void afficheEc(Ens ec){
 Ens creerEc(){
   Ens ec;
   ec.nbPoint = 0;
+  ec.point[ec.nbPoint] = creerCoord(0,0);
   return ec;
 }
 
@@ -85,7 +92,8 @@ Ens creerEc(){
 // AJOUTE EC //
 
 void ajouteEc(Ens &ec, Coord c){
-  ec.point[ec.nbPoint] = c;
+  ec.point[ec.nbPoint].x = c.x;
+  ec.point[ec.nbPoint].y = c.y;
   ec.nbPoint++;
 }
 
@@ -133,7 +141,7 @@ Ens trouverVoisin(Coord c){
 }
 
 
-Coord randomEC(Ens ec){
+/*Coord randomEC(Ens ec){
   Coord c;
   int abs, ord;
   abs = rand();// pour obtenir un nombre aléatoire entre 0 et n (compris), il faut appliquer un modulo (n+1) au résultat de l'appel à rand()
@@ -156,19 +164,21 @@ Ens supprimeEc(Ens &ec, Coord c){
     }
   }
   return ec;
-}
+}*/
 
 
 
 int main(){
 
   Coord c1 = creerCoord(2,1);
-  /*Coord c2 = creerCoord(3,4);
+  afficheCoord(c1);
+  /*cout << endl;
+  Coord c2 = creerCoord(3,4);
   Coord c3 = creerCoord(0,0);*/
   
   Ens exemple = creerEc();
-  ajouteEc(exemple, c1);
-  /*ajouteEc(exemple, c2);
+  /*ajouteEc(exemple, c1);
+  ajouteEc(exemple, c2);
   ajouteEc(exemple, c3);*/
   afficheEc(exemple);
  
