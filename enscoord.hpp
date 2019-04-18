@@ -6,6 +6,7 @@
 using namespace std;
 
 #include "enscoord.cpp"
+#include "coord.hpp"
 
 struct Ens {
   Coord point[];
