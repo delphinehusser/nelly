@@ -2,6 +2,7 @@
 #include <iostream>
 #include <ostream>
 #include <chrono>
+#include <cmath>
 
 using namespace std;
 
@@ -146,29 +147,34 @@ Ens trouverVoisin(Coord c){
 }
 
 
-Coord randomEc(Ens ec){
+/*Coord randomEc(Ens ec){
   Coord c;
   int abs, ord;
-  abs = rand();
-  abs = abs%(GRILLE_TAILLE+1);//A TESTER
-  ord = rand();
-  ord = ord%(GRILLE_TAILLE+1);
-  cout << abs << ord << endl;
+  abs = rand()%(GRILLE_TAILLE+1);//A TESTER
+  ord = rand()%(GRILLE_TAILLE+1);
+  cout << "(" << abs << "," << ord << ")" << endl;
 
   for (int i = 0; i < ec.nbPoint; i++){
     while (egalCoord(creerCoord(abs,ord), ec.point[i]) == false){
-      abs = rand();
-      abs = abs%(GRILLE_TAILLE+1);
-      ord = rand();
-      ord = ord%(GRILLE_TAILLE+1);
+      abs = rand()%(GRILLE_TAILLE+1);
+      ord = rand()%(GRILLE_TAILLE+1);
     }
+  }
   c.x = abs;
   c.y = ord;
-  }
   return c;
+}*/
+
+
+Coord randomEc(Ens ec){
+  int compteur;
+  compteur = rand() % ec.nbPoint;
+  cout << compteur << endl;
+  afficheCoord(ec.point[compteur]);
+  return ec.point[compteur];
 }
 
-// SUPPRIME EC // 
+
 
 Ens supprimeEc(Ens &ec, Coord c){
   for (int i = 0; i < ec.nbPoint; i++){
@@ -177,8 +183,8 @@ Ens supprimeEc(Ens &ec, Coord c){
 	ec.point[j].x = ec.point[j+1].x;
 	ec.point[j].y = ec.point[j+1].y;
       }
-      ec.point[ec.nbPoint].x = 0;
-      ec.point[ec.nbPoint].y = 0;
+      ec.point[ec.nbPoint-1].x = 0;
+      ec.point[ec.nbPoint-1].y = 0;
       ec.nbPoint--;
     }
   }
@@ -207,15 +213,24 @@ int main(){
   afficheEc(exemple);
   cout << endl;
 
-  cout << "Choix d'une coordonnée random :" << endl;
+  cout << "Ajout d'un élément :" << endl;
+  ajouteEc(exemple, creerCoord(1,6));
+  afficheEc(exemple);
+  cout << endl;
+
+  /*cout << "Choix d'une coordonnée random :" << endl;
   Coord random;
   random = randomEc(exemple);
-  afficheCoord(random);
   cout << endl;
 
   cout << "Suppression d'un élément :" << endl;
   supprimeEc(exemple, random);
-  afficheEc(exemple);
+  cout << endl;
+
+  cout << "Un élément supprimé" << endl;
+  afficheEc(exemple);*/
+
+  cout << rand() % 40 << endl;
 
   return 0;
 }
