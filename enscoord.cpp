@@ -1,11 +1,13 @@
-#include <cstdlib>
-#include "code.hpp"
-#include "coord.cpp"
-#include "animal.cpp"
-#include "ens.cpp"
-#include "grille.cpp"
+//#include <cstdlib>
+//#include "code.hpp"
+//#include "coord.cpp"
+//#include "animal.cpp"
+//#include "ens.cpp"
+//#include "grille.cpp"
 #include <iostream>
 #include <chrono>;
+
+#include "enscoord.hpp"
 
 using namespace std;
 
