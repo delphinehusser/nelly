@@ -13,7 +13,7 @@ struct Ens {
   int nbPoint;
 };
 
-void ensVide(Ens ec);
+void ecVide(Ens ec);
 void afficheEc(Ens ec);
 Ens creerEc();
 void ajouteEc(Ens ec,Coord c);
