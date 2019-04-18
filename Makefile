@@ -1,12 +1,18 @@
-CFLAGS = -Wall -g -std=c++11 #definition de variable
+# Le compilateur à utiliser
+CXX = g++
+# Les options du compilateur
+CXXFLAGS = -Wall -std=c++11 -g
 
-all : main
+# Les programmes principaux
+# On donne le fichier cpp et la liste des fichiers .o qu'ils utilisent
+projet: projet.cpp coord.o enscoord.o
+testenscoord: testenscoord.cpp coord.o enscoord.o
 
-PolyAbstr.o: code.hpp code.cpp
-	g++ $(CFLAGS) -c code.cpp
+# Les différents composants
+# on donne le fichier cpp ainsi que la liste des fichiers .hpp dont ils dépendent
+coord.o: coord.cpp coord.hpp
+enscoord.o: enscoord.cpp enscoord.hpp coord.hpp
 
-main: main.cpp code.o
-	g++ $(CFLAGS) main.cpp code.o -o main
-
+# Pour faire le ménage
 clean:
-	rm -f main code.o
+	rm -f projet test *.o
