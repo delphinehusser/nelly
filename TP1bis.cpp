@@ -230,7 +230,7 @@ int main(){
   cout << "Un élément supprimé" << endl;
   afficheEc(exemple);
 
-  cout << "Les voisins de c2 sont :";
+  cout << "Les voisins de c2 sont :" << endl;
   Ens exemple2;
   exemple2 = trouverVoisin(c2);
   afficheEc(exemple2);
