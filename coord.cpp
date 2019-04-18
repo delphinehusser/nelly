@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <chrono>
+#include "coord.hpp"
 
 using namespace std;
 
