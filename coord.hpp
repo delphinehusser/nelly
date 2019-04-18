@@ -13,8 +13,10 @@ struct Coord{
 };
 
 coord creerCoord(int x, int g);
+void afficheCoord (Coord c);
 int getX(coord c);
 int getY(coord c);
 bool egalCoord(Coord c1, Coord c2);
+void testEgalCoord();
 
 
