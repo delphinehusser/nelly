@@ -9,11 +9,6 @@ using namespace std;
 
 // CREER COORD //
 
-struct Coord{
-  int x;
-  int y;
-};
-
 Coord creerCoord(int abs, int ord){
   Coord point;
   point.x = abs;
