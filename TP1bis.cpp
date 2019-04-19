@@ -218,7 +218,7 @@ int main(){
   afficheEc(exemple);
   cout << endl;
 
-  /*cout << "Choix d'une coordonnée random :" << endl;
+  cout << "Choix d'une coordonnée random :" << endl;
   Coord random;
   random = randomEc(exemple);
   cout << endl;
@@ -228,9 +228,12 @@ int main(){
   cout << endl;
 
   cout << "Un élément supprimé" << endl;
-  afficheEc(exemple);*/
+  afficheEc(exemple);
 
-  cout << rand() % 40 << endl;
+  cout << "Les voisins de c2 sont :" << endl;
+  Ens exemple2;
+  exemple2 = trouverVoisin(c2);
+  afficheEc(exemple2);
 
   return 0;
 }
