@@ -41,8 +41,8 @@ void ecVide(Ens &ec){
 // AJOUTE EC //
 
 void ajouteEc(Ens &ec, Coord c){
+	ec.nbPoint++;
   ec.point[nbPoint] = c;
-  ec.nbPoint++;
 }
 
 // RETOURNE LE NOMBRE DE POINT DANS L'ENSEMBLE //
