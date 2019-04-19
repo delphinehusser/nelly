@@ -5,7 +5,7 @@
 //#include "ens.cpp"
 //#include "grille.cpp"
 #include <iostream>
-#include <chrono>;
+#include <chrono>
 
 #include "enscoord.hpp"
 
@@ -43,8 +43,12 @@ void ecVide(Ens &ec){
 // AJOUTE EC //
 
 void ajouteEc(Ens &ec, Coord c){
-  ec.point[nbPoint] = c;
-  ec.nbPoint++;
+  if (estDans(ec, c)==true){
+    cout << "Déjà présent" << endl;
+  } else {
+    ec.point[nbPoint] = c;
+    ec.nbPoint++;
+  }
 }
 
 // RETOURNE LE NOMBRE DE POINT DANS L'ENSEMBLE //
