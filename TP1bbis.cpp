@@ -3,6 +3,7 @@
 #include <ostream>
 #include <chrono>
 #include <cmath>
+#include <ctime>
 
 using namespace std;
 
@@ -26,7 +27,7 @@ struct Ens{
   int nbPoint;
 };
 
-enum Espece{ Vide, Lapin , Renard };
+enum Espece{ Vide , Lapin , Renard };
 
 struct Animal{
   Coord ou;
@@ -49,7 +50,7 @@ float ProbReproLapin = 0.2;
 float ProbReproRenard = 0.07;
 
 
-/********************************************************************/
+/**********************************************************************/
 
 
 Coord creerCoord(int abs, int ord){
@@ -210,7 +211,7 @@ Ens trouverVoisin(Coord c){
 
 Coord randomEc(Ens ec){
   int compteur;
-  compteur = rand() % ec.nbPoint;
+  compteur = rand()%ec.nbPoint;
   cout << compteur << endl;
   afficheCoord(ec.point[compteur]);
   return ec.point[compteur];
@@ -243,6 +244,19 @@ Animal creerAnimal(Espece e, Coord c){
   a.ou = c;
   a.food = FoodInit;
   return a;
+}
+
+
+/*void afficheEspece(){
+  switch
+}*/
+
+
+void afficheAnimal(Animal a){
+  cout << "C'est un " << Espece.a.quoi << endl;
+  cout << a.quoi << " est en ";
+  afficheCoord(a.ou);
+  cout << a.quoi << " a " << a.food << " nourriture" << endl;
 }
 
 // COORD ANIMAL //
@@ -331,9 +345,60 @@ bool seReproduitAnimal (Animal a, int casesVides){
   cout << "L'animal ne peut pas se reproduire." << endl;
   return false;
 }
+  
+       
+/***********************************************************************/
+
+
+Grille creerGrille(){
+  Grille g;
+  for (int i = 0; i < GRILLE_TAILLE; i++){
+    for (int j = 0; j < GRILLE_TAILLE; j++){
+      g.caseG[i][j] = creerAnimal(Vide, creerCoord(0,0));
+    }  
+  }
+  return g;
+}
           
+// COPIE UNE GRILLE G1 DANS UNE GRILLE G2 //  
+          
+void copieGrille (Grille g1, Grille &g2){
+  for (int i = 0; i < GRILLE_TAILLE; i++){
+    for (int j = 0; j < GRILLE_TAILLE; j++){
+      g1.caseG[i][j] = g2.caseG[i][j];
+    }  
+  }
+}
+          
+// RENVOIE LA COPIE DE L'ANIMAL DANS UNE CASE DE LA GRILLE //  
+         
+Animal getAnimal (Grille g, Coord c){
+  Animal copie;
+  return copie = g.caseG[c.x][c.y];
+}
+          
+// RANGE UN ANIMAL A SA PLACE DANS LA GRILLE //
+
+void setAnimal (Grille &g, Animal a){
+  g.caseG[a.ou.x][a.ou.y] = a;
+}
 
 
+Ens voisinsVides(Grille g, Coord c){
+  Ens casesVides;
+  ensVide(casesVides);
+  Ens voisins = trouverVoisin(c);
+
+  for (int i=0;i < voisins.nbPoint ;i++){
+    if(g.caseG[getX(voisins.point[i])][getY(voisins.point[i])].quoi == Vide){
+      ajouteEc(casesVides,voisins.point[i]);
+    }
+  }
+  return casesVides;
+}
+
+
+/*********************************************************************/
 
 
 
@@ -373,14 +438,16 @@ int main(){
   afficheEc(exemple);
   cout << endl;
 
-  cout << "Les voisins de c2 sont :" << endl;
+  cout << "Les voisins de c3 sont :" << endl;
   Ens exemple2;
-  exemple2 = trouverVoisin(c2);
+  exemple2 = trouverVoisin(c3);
   afficheEc(exemple2);
   cout << endl;
 
-  Animal truc;
+  Animal truc, bidule, gertrude;
   truc = creerAnimal(Renard, c3);
+  bidule = creerAnimal(Lapin, c1);
+  gertrude = creerAnimal(Lapin, c2);
   faimRenard(truc);
   faimRenard(truc);
   faimRenard(truc);
@@ -388,7 +455,30 @@ int main(){
   faimRenard(truc);
   cout << "Le niveau de nourriture de l'animal est " << nourritureRenard(truc) << "." << endl;
   mortAnimal(truc);
-  seReproduitAnimal(truc, 3); 
+  seReproduitAnimal(truc, 3);
+  cout << endl;
+
+  Grille g;
+  g = creerGrille();
+  Ens vides, vides2;
+  Animal a, b;
+
+  setAnimal (g, truc);
+  setAnimal (g, bidule);
+  setAnimal (g, gertrude);
+
+  vides = voisinsVides(g, c3);
+  afficheEc(vides);
+
+  vides2 = voisinsVides(g, creerCoord(1,1));
+  afficheEc(vides2);
+
+  a = getAnimal (g, c2);
+  afficheAnimal(a);
+  b = getAnimal (g, creerCoord(1,1)); 
+  afficheAnimal(b);
+  
+  
 
   return 0;
 }
