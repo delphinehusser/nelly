@@ -410,6 +410,28 @@ void setAnimal (Grille &g, Animal a){
   g.caseG[a.ou.x][a.ou.y] = a;
 }
 
+// INITIALISE UNE GRILLE //
+
+void initialiseGrille(Grille &g){
+  float compteur;
+  for (int i = 0; i < GRILLE_TAILLE; i++){
+    for (int j = 0; j < GRILLE_TAILLE; j++) {
+      compteur = float(rand());
+      if(compteur < 0.07){
+        g.caseG[i][j].quoi = Renard;
+        getAnimal(g, creerCoord(i,j));
+      } else if (compteur < 0.27){
+        g.caseG[i][j].quoi = Lapin;
+        getAnimal(g, creerCoord(i,j));
+      } else if (compteur >= 0.27){
+        g.caseG[i][j].quoi = Vide;
+        getAnimal(g, creerCoord(i,j));
+      }
+    }
+  }
+}
+
+// TROUVE LES CASES VOISINES D'UNE ESPECE D'UNE COORD //
 
 Ens voisinsEspece(Grille g, Coord c, Espece e){
   Ens casesEspece;
