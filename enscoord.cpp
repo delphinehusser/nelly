@@ -37,6 +37,7 @@ cout << "L'ensemble contient: ";
   afficheCoord(ec.point[i]);
   cout << " ";
   }
+cout << "Il y a " << ec.nbPoint << " coordonnées dans cet ensemble." << endl;
 }
 
 // ENS VIDE //
@@ -116,8 +117,8 @@ Ens trouverVoisin(Coord c){
 
 
 // RETOURNE UNE COORDONNEE AU HASARD PARMI UN ENSEMBLE //
-
-Coord randomEC(Ens ec){
+                        // A MODIFIER
+/*Coord randomEC(Ens ec){
   Coord c;
   int abs, ord;
   abs = rand();// pour obtenir un nombre aléatoire entre 0 et n (compris), il faut appliquer un modulo (n+1) au résultat de l'appel à rand()
@@ -125,7 +126,16 @@ Coord randomEC(Ens ec){
   c.x = abs;
   c.y = ord;
   return c;
+}*/
+
+Coord randomEc(Ens ec){
+  int compteur;
+  compteur = rand()%ec.nbPoint;
+  cout << compteur << endl;
+  afficheCoord(ec.point[compteur]);
+  return ec.point[compteur];
 }
+
 
 // SUPPRIME UNE COORDONNEE D'UN ENSEMBLE //
 
