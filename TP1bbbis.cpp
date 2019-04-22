@@ -438,7 +438,7 @@ Ens voisinsEspece(Grille g, Coord c, Espece e){
   ecVide(casesEspece);
   Ens voisins = trouverVoisin(c);
 
-  for (int i=0;i < voisins.nbPoint ;i++){
+  for (int i = 0; i < voisins.nbPoint; i++){
     if(g.caseG[getX(voisins.point[i])][getY(voisins.point[i])].quoi == e){
       ajouteEc(casesEspece,voisins.point[i]);
     }
