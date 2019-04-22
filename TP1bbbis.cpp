@@ -454,6 +454,85 @@ void deplaceAnimal(Grille &g, Animal &a, Ens casesEspece){
 }
 
 
+void deplaceTousLapins(Grille g, Grille &g1){
+  Coord c = creerCoord(0,0);
+  Animal a = creerAnimal(Vide, creerCoord(0,0));
+  Ens ec = creerEc();
+  for (int i = 0; i < GRILLE_TAILLE; i++){
+    for (int j = 0; j < GRILLE_TAILLE; j++){
+      if (g.caseG[i][j].quoi == Lapin){
+        c = creerCoord(i,j);
+        a = g.caseG[i][j];
+        getAnimal(g, c);
+        ec = voisinsEspece(g, c, Vide);
+        deplaceAnimal(g1, a, ec);
+        if (seReproduitAnimal(a, ec.nbPoint) == true){
+          setAnimal(g1, a);
+        }
+      }
+    }
+  }
+}
+
+// RETOURNE L'ENSEMBLE DES COORDS DES ANIMAUX DE L'ESPECE e PRESENTS SUR LA GRILLE g //
+
+Ens toutEspece(Grille g, Espece e){
+  Ens ecEspece = creerEc();
+  for (int i = 0; i < GRILLE_TAILLE; i++){
+    for (int j = 0; j < GRILLE_TAILLE; j++){
+      if (g.caseG[i][j].quoi == e){
+        ajouteEc(ecEspece, creerCoord(i,j));
+      }
+    }
+  }
+  return ecEspece;
+}
+
+// SE DEPLACE SUR L'EMPLACEMENT DU LAPIN, ET RETOURNE VRAI SI LE RENARD A MANGE LE LAPIN //
+
+bool attaqueRenard(Grille &g, Animal &a){
+  Ens ec = creerEc();
+  ec = voisinsEspece(g, a.ou, Lapin);
+  if (ec.nbPoint == 0){
+    ec = voisinsEspece(g, a.ou, Vide);
+    deplaceAnimal(g, a, ec);
+    return false;
+  }
+  deplaceAnimal(g, a, ec);
+  mangeRenard(a);
+  return true;
+}
+
+
+
+void deplaceTousRenard(Grille g, Grille &g1){
+  Coord c = creerCoord(0,0);
+  Animal a = creerAnimal(Vide, creerCoord(0,0));
+
+  for (int i = 0; i < GRILLE_TAILLE; i++){
+    for (int j = 0; j < GRILLE_TAILLE; j++){
+      if (g.caseG[i][j].quoi == Renard){
+        c = creerCoord(i,j);
+        a = g.caseG[i][j];
+        getAnimal(g, c);
+
+        faimRenard(a);
+        if (mortAnimal(a) == true){
+          g1.caseG[i][j].quoi = Vide;
+          break;
+        }
+
+        attaqueRenard(g, a);
+
+        if (seReproduitAnimal(a, GRILLE_TAILLE) == true){
+          setAnimal(g1, a);
+        }
+      }
+    }
+  }
+}
+
+
 
 /*********************************************************************/
 
