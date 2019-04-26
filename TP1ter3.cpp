@@ -494,15 +494,18 @@ Ens trouveTousEspece (Grille g, Espece e){
 }
 
 
-void deplaceTousLapins(Grille &g){
+
+void deplaceTousLapins(Grille g, Grille &g1){
   Ens ec = trouveTousEspece(g, Lapin);
   Ens el = creerEc();
   for (int i = 0; i < ec.nbPoint; i++){
     Animal b = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
     el = voisinsEspece(g, ec.point[i], Vide);
-    deplaceAnimal(g, b, el);
+    deplaceAnimal(g1, b, el);
     if (seReproduitAnimal(b, ec.nbPoint) == false){
-          b.quoi = Vide;
+      b.quoi = Vide;
+    } else if (seReproduitAnimal(b, ec.nbPoint) == true){
+      setAnimal(g1, b);
     }
   }
 }
