@@ -555,18 +555,28 @@ void tourRenard(Grille g, Grille &g1){
 
 // SE DEPLACE SUR L'EMPLACEMENT DU LAPIN, ET RETOURNE VRAI SI LE RENARD A MANGE LE LAPIN //
 
-bool attaqueRenard(Grille &g, Animal &a){
+/*bool attaqueRenard(Grille &g, Animal &a){
   Ens ec = creerEc();
   ec = voisinsEspece(g, a.ou, Lapin);
   if (ec.nbPoint == 0){
     ec = voisinsEspece(g, a.ou, Vide);
     if (ec.nbPoint != 0){
-    deplaceAnimal(g, a, ec);
+       deplaceAnimal(g, a, ec);
     }
     return false;
   }
   deplaceAnimal(g, a, ec);
   mangeRenard(a);
+  return true;
+}*/
+
+// RETOURNE VRAI SI LE RENARD A MANGE LE LAPIN, FAUX SINON//
+bool attaqueRenard2(Grille g, Animal a){
+  Ens ec = creerEc();
+  ec = voisinsEspece(g, a.ou, Lapin);
+  if (ec.nbPoint == 0){
+    return false;
+  }
   return true;
 }
 
@@ -605,24 +615,25 @@ void deplaceTousRenard(Grille g, Grille &g1){
           setAnimal(g1, mort);
       }
       else if (mortAnimal(b) == false){
-          if (attaqueRenard(g, b) == true){
+          if (attaqueRenard2(g, b) == true){
             el = voisinsEspece(g, ec.point[i], Lapin);
+            cout << "Lapin autour " << el.nbPoint << endl;
             deplaceAnimal(g1, b, el);
             mangeRenard(b);
-          } else if (attaqueRenard(g, b) == false){
+          } else if (attaqueRenard2(g, b) == false){
             el = voisinsEspece(g, ec.point[i], Vide);
+            cout << "Vide autour " << el.nbPoint << endl;
             deplaceAnimal(g1, b, el);
           }
 
           if (seReproduitAnimal(b, 5) == false){
-           temp.quoi = Vide;
-           temp.food = FoodInit;
+           Animal temp = creerAnimal(Vide, ec.point[i]);
            setAnimal(g1, temp);
           } else if (seReproduitAnimal(b, 5) == true){
-           temp.food = FoodInit;
-           setAnimal(g1, temp);
+           Animal temp2 = creerAnimal(Renard, ec.point[i]);
+           setAnimal(g1, temp2);
           }
-         faimRenard(b);
+          faimRenard(b);
       }
    }
 }
@@ -744,9 +755,9 @@ int main(){
   tourRenard(gg, g1);
   copieGrille(g1, gg);
   affichegrille(g1);
-  /*deplaceTousRenard(gg, g1);
+  deplaceTousRenard(gg, g1);
   copieGrille(g1, gg);
   affichegrille(gg);
-*/
+
 return 0;
 }
