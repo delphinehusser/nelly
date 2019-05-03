@@ -785,7 +785,7 @@ int main(){
   initialiseGrille(gg);
   affichegrille(gg);
 
-  for (int k = 0; k < 6; k++){
+  for (int k = 1; k <= 6; k++){
 
   cout << "TOUR " << k << endl;
 
