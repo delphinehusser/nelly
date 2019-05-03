@@ -787,6 +787,7 @@ int main(){
 
   for (int k = 0; k < 6; k++){
 
+  cout << "TOUR " << k << endl;
 
   Ens lapins;
   lapins = trouveTousEspece(gg, Lapin);
@@ -824,8 +825,10 @@ int main(){
      autour2 = voisinsEspece(gg, renards.point[j], Lapin);
      c = getAnimal(gg, renards.point[j]);
      d = c;
-
-     if (mortAnimal(c) == false){
+     if (mortAnimal(c) == true){
+       Animal mort = creerAnimal(Vide, renards.point[j]);
+       setAnimal(g1, mort);
+     } else if (mortAnimal(c) == false){
 
         if (attaqueRenard2(gg, c) == true){
            if (autour2.nbPoint != 0){
@@ -865,6 +868,6 @@ int main(){
   deplaceTousRenard(gg, g1);
   copieGrille(g1, gg);
   affichegrille(gg);*/
-
+cout << "FIN DE LA SIMULATION" << endl;
 return 0;
 }
