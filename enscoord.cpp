@@ -1,6 +1,6 @@
 //#include <cstdlib>
 //#include "code.hpp"
-//#include "coord.cpp"
+#include "coord.cpp"
 //#include "animal.cpp"
 //#include "ens.cpp"
 //#include "grille.cpp"

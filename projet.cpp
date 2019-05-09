@@ -7,6 +7,9 @@ using namespace std;
 
 #include "coord.hpp"
 #include "enscoord.hpp"
+#include "animal.hpp"
+#include "grille.hpp"
+
 
 int FoodInit = 5;
 int FoodLapin = 5;
@@ -23,4 +26,6 @@ enum Espece { Vide, Lapin , Renard };
 int GRILLE_TAILLE = 20;
 
 int main(){
+
+
 }

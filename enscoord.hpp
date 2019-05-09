@@ -1,10 +1,13 @@
+#ifndef enscoord_hpp
+#define enscoord_hpp
+
 #include <cstdlib>
 #include <iostream>
 #include <ostream>
 #include <cmath>
 #include <chrono>
 using namespace std;
-#include "coord.cpp"
+#include "coord.hpp"
 
 
 
@@ -23,3 +26,4 @@ bool estDansEc(Ens ec, Coord c);
 Ens trouverVoisin(Coord c);
 Ens supprimeEc(Ens &ec, Coord c);
 Coord randomEC(Ens ec);
+#endif

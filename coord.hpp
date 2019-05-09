@@ -1,3 +1,5 @@
+#ifndef coord_hpp
+#define coord_hpp
 #include <cstdlib>
 #include <iostream>
 #include <ostream>
@@ -17,4 +19,4 @@ int getY(Coord c);
 bool egalCoord(Coord c1, Coord c2);
 void testEgalCoord();
 
-
+#endif

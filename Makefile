@@ -5,13 +5,16 @@ CXXFLAGS = -Wall -std=c++11 -g
 
 # Les programmes principaux
 # On donne le fichier cpp et la liste des fichiers .o qu'ils utilisent
-projet: projet.cpp coord.o enscoord.o
+projet: projet.cpp coord.o enscoord.o grille.o animal.o
 testenscoord: testenscoord.cpp coord.o enscoord.o
 
 # Les différents composants
 # on donne le fichier cpp ainsi que la liste des fichiers .hpp dont ils dépendent
 coord.o: coord.cpp coord.hpp
 enscoord.o: enscoord.cpp enscoord.hpp coord.hpp
+grille.o: grille.cpp animal.o
+
+
 
 # Pour faire le ménage
 clean:
