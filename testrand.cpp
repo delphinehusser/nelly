@@ -4,6 +4,10 @@
 #include <chrono>
 #include <cmath>
 #include <ctime>
+#include <iomanip>
+#include <fstream>
+#include <sstream>
+#include <string>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -71,7 +75,7 @@ float ProbReproRenard = 0.07;
 Coord creerCoord(int abs, int ord){
   Coord point;
   if (abs >= 0 and ord >=0){
-    if (abs <= GRILLE_TAILLE and ord <= GRILLE_TAILLE){
+    if (abs < GRILLE_TAILLE and ord < GRILLE_TAILLE){
       point.x = abs;
       point.y = ord;
     }
@@ -81,7 +85,7 @@ Coord creerCoord(int abs, int ord){
 
 
 void afficheCoord(Coord c){
-  //cout << "(" << c.x << "," << c.y << ")";
+  cout << "(" << c.x << "," << c.y << ")";
 }
 
 // GET X //
@@ -260,7 +264,7 @@ Coord randomEc(Ens ec){
   int compteur;
   compteur = rand()%ec.nbPoint;
   //cout << compteur << endl;
-  afficheCoord(ec.point[compteur]);
+  //afficheCoord(ec.point[compteur]);
   return ec.point[compteur];
 }
 
@@ -382,7 +386,7 @@ bool seReproduitAnimal (Animal a, int casesVides){
     if (nourritureRenard(a) >= FoodReprod){
       int prob = rand()%100;
       //cout<<prob<<endl;
-      if (prob <= 50){
+      if (prob <= ProbBirthRenard*100){
       //  cout << "Le renard peut se reproduire." << endl;
         return true;
       }
@@ -391,7 +395,7 @@ bool seReproduitAnimal (Animal a, int casesVides){
     //cout<<casesVides<<endl;
       if (casesVides >= MinFreeBirthLapin){
       //      cout<<prob2<<endl;
-        if (prob2 <= 50){
+        if (prob2 <= ProbBirthLapin*100){
 	  //      cout << "Le lapin peut se reproduire." << endl;
           return true;
         }
@@ -408,7 +412,7 @@ Grille creerGrille(){
   Grille g;
   for (int i = 0; i < GRILLE_TAILLE; i++){
     for (int j = 0; j < GRILLE_TAILLE; j++){
-      g.caseG[i][j] = creerAnimal(Vide, creerCoord(0,0));
+      g.caseG[i][j] = creerAnimal(Vide, creerCoord(i,j));
     }
   }
   return g;
@@ -516,7 +520,7 @@ Ens trouveTousEspece(Grille g, Espece e){
 
 //TRUC QUI CLOCHE DANS LES CONDITIONS DU if(seReproduitAnimal(b,e.nbPoint)) == false/true)
 // SOIT TOUS! LES LAPINS SE REPRODUISENT, SOIT NON
-void deplaceTousLapins(Grille g, Grille &g1){
+void deplaceTousLapins(Grille &g, Grille &g1){
   Ens ec = trouveTousEspece(g, Lapin);
   Ens el = creerEc();
   if (ec.nbPoint == 0){
@@ -527,24 +531,37 @@ void deplaceTousLapins(Grille g, Grille &g1){
     Animal b = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
     bool a = seReproduitAnimal(b, el.nbPoint);
     Animal temp = b;
-      if (el.nbPoint != 0){
+      if(el.nbPoint == 0){
+        setAnimal(g1, b);
+      } else if (el.nbPoint != 0){
         deplaceAnimal(g1, b, el);
-      if ( a == false){
-        temp.quoi = Vide;
-        setAnimal(g1, temp);
-      } else if (seReproduitAnimal(b, el.nbPoint) == true){
-        setAnimal(g1, temp);
+        setAnimal(g, b);
+        g.caseG[getX(ec.point[i])][getY(ec.point[i])].quoi = Vide;
+        if (a == true){
+          setAnimal(g1, temp);
+          setAnimal(g, temp);
+        }
       }
-      }
+   }
+}
+
+
+/*/void verifieGrille(Grille g, Espece e){
+  Ens animaux = creerEc();
+  animaux = trouveTousEspece(g, e);
+  for (int i = 0; i < GRILLE_TAILLE; i++){
+    for (int j = 0; j < GRILLE_TAILLE; j++){
+     if (animaux[i].quoi == g.caseG[i][j].quoi){
     }
   }
+}*/
 
 // APRES QUE LES DEPLACEMENTS DES LAPINS AIENT ETE TRANSFERES A LA NOUVELLE GRILLE,
 // IL FAUT TRANSFERER LA POSITION DE TOUS LES RENARDS DANS LA NOUVELLE GRILLE AVANT DE FAIRE deplacerTousRenard()
 // fonction qui marche
 void tourRenard(Grille g, Grille &g1){
   Ens ec = trouveTousEspece(g, Renard);
-  afficheEc(ec);
+  //afficheEc(ec);
   for (int i = 0; i < ec.nbPoint; i++){
     Animal b = creerAnimal(Renard, ec.point[i]);
     setAnimal(g1, b);
@@ -604,7 +621,34 @@ bool attaqueRenard2(Grille g, Animal a){
 }
 */
 
-void deplaceTousRenard(Grille g, Grille &g1){
+/*void deplaceTousLapins(Grille g, Grille &g1){
+  Ens ec = trouveTousEspece(g, Lapin);
+    afficheEc(ec);
+  Ens el = creerEc();
+  if (ec.nbPoint == 0){
+    return;
+  }
+
+  for (int i = 0; i < ec.nbPoint; i++){
+    el = voisinsEspece(g, ec.point[i], Vide);
+    Animal b = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
+    bool a = seReproduitAnimal(b, el.nbPoint);
+    Animal temp = b;
+      if(el.nbPoint == 0){
+        setAnimal(g1, b);
+      } else if (el.nbPoint != 0){
+        deplaceAnimal(g1, b, el);
+        setAnimal(g, b);
+        g.caseG[getX(ec.point[i])][getY(ec.point[i])].quoi = Vide;
+        if (a == true){
+          setAnimal(g1, temp);
+          setAnimal(g, temp);
+        }
+      }
+   }
+}*/
+
+void deplaceTousRenard(Grille &g, Grille &g1){
   Ens ec = trouveTousEspece(g, Renard);
   Ens el = creerEc();
   for (int i = 0; i < ec.nbPoint ; i++){
@@ -613,29 +657,44 @@ void deplaceTousRenard(Grille g, Grille &g1){
       if (mortAnimal(b) == true){
           Animal mort = creerAnimal(Vide, ec.point[i]);
           setAnimal(g1, mort);
+          setAnimal(g, mort);
       }
       else if (mortAnimal(b) == false){
-          if (attaqueRenard2(g, b) == true){
-            el = voisinsEspece(g, ec.point[i], Lapin);
-//            cout << "Lapin autour " << el.nbPoint << endl;
+          if (attaqueRenard2(g1, b) == true){
+            el = voisinsEspece(g1, ec.point[i], Lapin);
+            //cout << "Lapin autour " << el.nbPoint << endl;
             deplaceAnimal(g1, b, el);
-            mangeRenard(b);
-          } else if (attaqueRenard2(g, b) == false){
-            el = voisinsEspece(g, ec.point[i], Vide);
-//            cout << "Vide autour " << el.nbPoint << endl;
-            deplaceAnimal(g1, b, el);
-          }
+	    mangeRenard(b);
+            setAnimal(g, b);
+            g.caseG[getX(ec.point[i])][getY(ec.point[i])].quoi = Vide;
 
-          if (seReproduitAnimal(b, 5) == false){
-           Animal temp = creerAnimal(Vide, ec.point[i]);
-           setAnimal(g1, temp);
-          } else if (seReproduitAnimal(b, 5) == true){
-           Animal temp2 = creerAnimal(Renard, ec.point[i]);
-           setAnimal(g1, temp2);
+	    if (seReproduitAnimal(b, 5) == true){
+               Animal temp2 = creerAnimal(Renard, ec.point[i]);
+               setAnimal(g1, temp2);
+	       setAnimal(g, temp2);
+            }
+	  }	
+	  else if (attaqueRenard2(g1, b) == false){
+            el = voisinsEspece(g1, ec.point[i], Vide);
+//            cout << "Vide autour " << el.nbPoint << endl;
+		if(el.nbPoint == 0){
+		  setAnimal(g1, b);
+                } else if (el.nbPoint != 0){
+            	  deplaceAnimal(g1, b, el);
+                  setAnimal(g, b);
+	    	  g.caseG[getX(ec.point[i])][getY(ec.point[i])].quoi = Vide;
+
+		  if (seReproduitAnimal(b, 5) == true){
+                     Animal temp2 = creerAnimal(Renard, ec.point[i]);
+           	     setAnimal(g1, temp2);
+		     setAnimal(g, temp2);
+          	  }
+	          faimRenard(b);
+		
+	        } 
           }
-          faimRenard(b);
-      }
-   }
+     }
+  }
 }
 
 //AFFICHE UNE GRILLE POUR PREMIERE SIMUlATION //
@@ -658,6 +717,45 @@ void affichegrille(Grille g){
   cout << endl;
   cout << endl;
 }
+
+
+
+/*void afficheGrille2(Grille g){
+		//variable globale permettant de creer des noms de fichiers differents //
+		int compteurFichier = 0;
+		int r, v, b;
+			ostringstream filename;
+			// creation d'un nouveau nom de fichier de la forme img347.ppm //
+			filename << "img" << setfill('0') << setw(3) << compteurFichier << ".ppm";
+			compteurFichier++;
+			cout << "Ecriture dans le fichier : " << filename.str() << endl;
+			// ouverture du fichier //
+			ofstream fic(filename.str(), ios::out | ios::trunc);
+			//ecriture de l'entête //
+			fic << "P3" << endl;
+			fic << 20 << " " << 20 << " " << endl;
+			fic << 255 << " " << endl;
+			// écriture des pixels //
+			for (int i = 0; i < GRILLE_TAILLE; i++){
+				for(int j = 0 ; j < GRILLE_TAILLE; j++){
+					// calcul de la couleur //
+					if(g.caseG[i][j].quoi == 0){
+						{r = 255; v = 255; b = 255; }
+					}if(g.caseG[i][j].quoi == 1){
+						{r = 0; v = 0; b = 255; }
+					}
+					if(g.caseG[i][j].quoi == 2){
+						{r = 255; v = 0; b = 0; }
+					}
+					// écriture de la couleur dans le fichier //
+					fic << r << " " << v << "  " << b << " ";
+					}
+					// fin de ligne dans l'image //
+					fic << endl;
+			}
+			// fermeture du fichier //
+			fic.close();
+	}*/
 
 
 
@@ -752,13 +850,25 @@ int main(){
   Grille gg = creerGrille();
   Grille g1 = creerGrille();
   initialiseGrille(gg);
-  initialiseGrille(g1);
   affichegrille(gg);
-  deplaceTousLapins( gg, g1);
+
+
+  Ens ecl = trouveTousEspece(gg, Lapin);
+  cout << "Nombre de lapins : " << ecl.nbPoint << endl;
+  Ens ecr = trouveTousEspece(gg, Renard);
+  cout << "Nombre de renards : " << ecr.nbPoint << endl;
+  cout << endl;
+
+  deplaceTousLapins(gg, g1);
+  //tourRenard(gg, g1);
+  //affichegrille(g1);
+  //copieGrille(g1, gg);
+  affichegrille(gg);
+  deplaceTousRenard(gg, g1);
   affichegrille(g1);
 
-    Ens e = trouveTousEspece(gg,Lapin);
-  Ens a = voisinsEspece( gg, (gg.caseG[getX(e.point[1])][getY(e.point[1])]).ou, Vide);
+    //Ens e = trouveTousEspece(gg,Lapin);
+  //Ens a = voisinsEspece( gg, (gg.caseG[getX(e.point[1])][getY(e.point[1])]).ou, Vide);
 /*  for(int i= 0;i<5;i++){
     //cout<<rand()%100<<endl;
     a = voisinsEspece( gg, (gg.caseG[getX(e.point[i])][getY(e.point[i])]).ou, Vide);
@@ -771,7 +881,7 @@ int main(){
   deplaceTousLapins(gg, g1);
   tourRenard(gg, g1);
   copieGrille(g1, gg);
-  affichegrille(g1);
+  affichegrille(gg);
   deplaceTousRenard(gg, g1);
   copieGrille(g1, gg);
   affichegrille(gg);
