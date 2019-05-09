@@ -382,23 +382,28 @@ bool mortAnimal(Animal a){
 
 bool seReproduitAnimal (Animal a, int casesVides){
     int prob2 = rand()%100;
+          int prob = rand()%100;
   if (especeAnimal(a) == Renard){
     if (nourritureRenard(a) >= FoodReprod){
-      int prob = rand()%100;
+
       //cout<<prob<<endl;
       if (prob <= ProbBirthRenard*100){
-      //  cout << "Le renard peut se reproduire." << endl;
+        cout << "Le renard peut se reproduire." << endl;
         return true;
-      }
+      } else {
+cout << "Le renard ne peut pas se reproduire." << endl;
+}
     }
   } else if (a.quoi == Lapin){
     //cout<<casesVides<<endl;
       if (casesVides >= MinFreeBirthLapin){
-      //      cout<<prob2<<endl;
+          // cout<<prob2<<endl;
         if (prob2 <= ProbBirthLapin*100){
-	  //      cout << "Le lapin peut se reproduire." << endl;
+	       cout << "Le lapin peut se reproduire." << endl;
           return true;
-        }
+        } else {
+	  cout << "Le lapin ne peut pas se reproduire." << endl;
+}
       }
   }
   //cout << "L'animal ne peut pas se reproduire." << endl;
@@ -530,7 +535,7 @@ void deplaceTousLapins(Grille &g, Grille &g1){
     el = voisinsEspece(g, ec.point[i], Vide);
     Animal b = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
     bool a = seReproduitAnimal(b, el.nbPoint);
-    Animal temp = b;
+    Animal temp = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
       if(el.nbPoint == 0){
         setAnimal(g1, b);
       } else if (el.nbPoint != 0){
@@ -540,10 +545,45 @@ void deplaceTousLapins(Grille &g, Grille &g1){
         if (a == true){
           setAnimal(g1, temp);
           setAnimal(g, temp);
+        } else {
+	  temp.quoi = Vide;
+	  setAnimal(g1, temp);
+	  setAnimal(g, temp);
         }
       }
    }
 }
+
+
+/*void deplaceTousLapins(Grille g, Grille &g1){
+  Ens ec = trouveTousEspece(g, Lapin);
+  Ens el = creerEc();
+  if (ec.nbPoint == 0){
+    return;
+  }
+  for (int i = 0; i < ec.nbPoint; i++){
+    Animal b = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
+    Animal temp = b;
+    el = voisinsEspece(g, ec.point[i], Vide);
+    if (el.nbPoint != 0){
+      deplaceAnimal(g1, b, el);
+      //g.caseG[getX(ec.point[i])][getY(ec.point[i])].quoi = Vide;
+      //cout << "Maintenant en ";
+      //afficheCoord(b.ou);
+    } else if (el.nbPoint == 0){
+      setAnimal(g1, b);
+    }
+
+    if (seReproduitAnimal(b, el.nbPoint) == false){
+      temp.quoi = Vide;
+      setAnimal(g, temp);
+      setAnimal(g1, temp);
+    } else if (seReproduitAnimal(b, el.nbPoint) == true){
+      setAnimal(g1, temp);
+    }
+    copieGrille(g, g1);
+  }
+}*/
 
 
 /*/void verifieGrille(Grille g, Espece e){
@@ -597,6 +637,8 @@ bool attaqueRenard2(Grille g, Animal a){
   return true;
 }
 
+
+
 /*void deplaceTousRenard(Grille g, Grille &g1){
   Coord c = creerCoord(0,0);
   Animal a = creerAnimal(Vide, creerCoord(0,0));
@@ -621,19 +663,18 @@ bool attaqueRenard2(Grille g, Animal a){
 }
 */
 
-/*void deplaceTousLapins(Grille g, Grille &g1){
+
+/*void deplaceTousLapins(Grille &g, Grille &g1){
   Ens ec = trouveTousEspece(g, Lapin);
-    afficheEc(ec);
   Ens el = creerEc();
   if (ec.nbPoint == 0){
     return;
   }
-
   for (int i = 0; i < ec.nbPoint; i++){
     el = voisinsEspece(g, ec.point[i], Vide);
     Animal b = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
     bool a = seReproduitAnimal(b, el.nbPoint);
-    Animal temp = b;
+    Animal temp = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
       if(el.nbPoint == 0){
         setAnimal(g1, b);
       } else if (el.nbPoint != 0){
@@ -643,17 +684,23 @@ bool attaqueRenard2(Grille g, Animal a){
         if (a == true){
           setAnimal(g1, temp);
           setAnimal(g, temp);
+        } else {
+	  temp.quoi = Vide;
+	  setAnimal(g1, temp);
+	  setAnimal(g, temp);
         }
       }
    }
 }*/
+
+
 
 void deplaceTousRenard(Grille &g, Grille &g1){
   Ens ec = trouveTousEspece(g, Renard);
   Ens el = creerEc();
   for (int i = 0; i < ec.nbPoint ; i++){
       Animal b = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
-      Animal temp = b;
+      Animal temp = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
       if (mortAnimal(b) == true){
           Animal mort = creerAnimal(Vide, ec.point[i]);
           setAnimal(g1, mort);
@@ -665,6 +712,7 @@ void deplaceTousRenard(Grille &g, Grille &g1){
             //cout << "Lapin autour " << el.nbPoint << endl;
             deplaceAnimal(g1, b, el);
 	    mangeRenard(b);
+  	    faimRenard(b);
             setAnimal(g, b);
             g.caseG[getX(ec.point[i])][getY(ec.point[i])].quoi = Vide;
 
@@ -688,7 +736,11 @@ void deplaceTousRenard(Grille &g, Grille &g1){
                      Animal temp2 = creerAnimal(Renard, ec.point[i]);
            	     setAnimal(g1, temp2);
 		     setAnimal(g, temp2);
-          	  }
+          	  } else {
+		     Animal temp2 = creerAnimal(Vide, ec.point[i]);
+		     setAnimal(g1, temp2);
+		     setAnimal(g, temp2);
+                  }
 	          faimRenard(b);
 		
 	        } 
@@ -852,20 +904,36 @@ int main(){
   initialiseGrille(gg);
   affichegrille(gg);
 
-
   Ens ecl = trouveTousEspece(gg, Lapin);
-  cout << "Nombre de lapins : " << ecl.nbPoint << endl;
+  cout << "Nombre de lapins initial: " << ecl.nbPoint << endl;
   Ens ecr = trouveTousEspece(gg, Renard);
-  cout << "Nombre de renards : " << ecr.nbPoint << endl;
+  cout << "Nombre de renards initial: " << ecr.nbPoint << endl;
   cout << endl;
+
+  int compteur = 0;
+
+  //while (trouveTousEspece(gg, Lapin).nbPoint != 0 and trouveTousEspece(gg, Renard).nbPoint != 0){
+  
+  for (int i = 0; i < 3; i++){
+  compteur++;
 
   deplaceTousLapins(gg, g1);
   //tourRenard(gg, g1);
   //affichegrille(g1);
   //copieGrille(g1, gg);
-  affichegrille(gg);
+  //affichegrille(gg);
   deplaceTousRenard(gg, g1);
   affichegrille(g1);
+  copieGrille(g1, gg);
+
+  Ens ecl2 = trouveTousEspece(gg, Lapin);
+  cout << "Nombre de lapins : " << ecl2.nbPoint << endl;
+  Ens ecr2 = trouveTousEspece(gg, Renard);
+  cout << "Nombre de renards : " << ecr2.nbPoint << endl;
+  cout << endl;
+  cout << "Compteur : " << compteur << endl;
+ 
+  }
 
     //Ens e = trouveTousEspece(gg,Lapin);
   //Ens a = voisinsEspece( gg, (gg.caseG[getX(e.point[1])][getY(e.point[1])]).ou, Vide);
