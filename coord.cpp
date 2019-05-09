@@ -18,6 +18,7 @@ Coord creerCoord(int abs, int ord){
   return point;
 }
 
+
 void afficheCoord (Coord c){
   cout << "(" << c.x << "," << c.y << ")" << endl;
 }
@@ -49,9 +50,6 @@ bool egalCoord(Coord c1, Coord c2){
   return false;
 }
 
-int main(){
-return 0;
-}
 
 //void testEgalCoord(){
   //ASSERT(egalCoord(creerCoord(1,2),creerCoord(1,2)) == true);

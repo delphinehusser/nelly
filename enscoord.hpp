@@ -9,16 +9,17 @@
 using namespace std;
 #include "coord.hpp"
 
-
-
-struct Ens {
-  Coord point[];
+const int MAXENSCOORD = 1000;
+const int GRILLE_TAILLE = 20;
+struct Ens{
+  Coord point[MAXENSCOORD];
   int nbPoint;
 };
 
 void ecVide(Ens &ec);
 void afficheEc(Ens ec);
 Ens creerEc();
+Coord randomEc(Ens ec);
 void ajouteEc(Ens &ec,Coord c);
 int cardEc(Ens ec);
 bool estVideEc(Ens ec);

@@ -1,22 +1,16 @@
-//#include <cstdlib>
-//#include "code.hpp"
-#include "coord.cpp"
-//#include "animal.cpp"
-//#include "ens.cpp"
-//#include "grille.cpp"
+
 #include <iostream>
 #include <chrono>
 
+#include "coord.hpp"
 #include "enscoord.hpp"
+
 
 
 using namespace std;
 
 /** Infrastructure minimale de test **/
 #define ASSERT(test) if (!(test)) cout << "Test failed in file " << __FILE__ << " line " << __LINE__ << ": " #test << endl
-
-
-const int GRILLE_TAILLE = 20;
 
 // CREER UN ENSEMBLE DE COORDONNEES //
 
@@ -153,8 +147,3 @@ Ens supprimeEc(Ens &ec, Coord c){
   }
   return ec;
 }
-
-
-
-
-

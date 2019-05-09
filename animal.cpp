@@ -14,9 +14,9 @@
 #include <time.h>
 using namespace std;
 
-#include "animal.hpp"
 #include "coord.hpp"
 #include "enscoord.hpp"
+#include "animal.hpp"
 
 Animal creerAnimal(Espece e, Coord c){
   Animal a;
@@ -130,10 +130,10 @@ bool seReproduitAnimal (Animal a, int casesVides){
 
       //cout<<prob<<endl;
       if (prob <= ProbBirthRenard*100){
-        cout << "Le renard peut se reproduire." << endl;
+      //  cout << "Le renard peut se reproduire." << endl;
         return true;
       } else {
-cout << "Le renard ne peut pas se reproduire." << endl;
+//cout << "Le renard ne peut pas se reproduire." << endl;
 }
     }
   } else if (a.quoi == Lapin){
@@ -141,15 +141,13 @@ cout << "Le renard ne peut pas se reproduire." << endl;
       if (casesVides >= MinFreeBirthLapin){
           // cout<<prob2<<endl;
         if (prob2 <= ProbBirthLapin*100){
-	       cout << "Le lapin peut se reproduire." << endl;
+	       //cout << "Le lapin peut se reproduire." << endl;
           return true;
         } else {
-	  cout << "Le lapin ne peut pas se reproduire." << endl;
+	  //cout << "Le lapin ne peut pas se reproduire." << endl;
 }
       }
   }
   //cout << "L'animal ne peut pas se reproduire." << endl;
   return false;
 }
-
-

@@ -18,6 +18,16 @@ using namespace std;
 
 #include "enscoord.hpp"
 
+const int FoodInit = 5;
+const int FoodLapin = 5;
+const int FoodReprod = 8;
+const int MaxFood = 10;
+const float ProbBirthRenard = 0.05;
+const float ProbBirthLapin = 0.3;
+const int MinFreeBirthLapin = 4;
+const float ProbReproLapin = 0.2;
+const float ProbReproRenard = 0.07;
+
 enum Espece{ Vide , Lapin , Renard };
 
 struct Animal{
@@ -27,7 +37,7 @@ struct Animal{
 };
 
 
-
+Animal creerAnimal(Espece e, Coord c);
 void afficheAnimal(Animal a);
 Coord coordAnimal (Animal a);
 Espece especeAnimal(Animal a);

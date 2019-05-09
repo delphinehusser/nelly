@@ -7,6 +7,7 @@
 #include <chrono>
 using namespace std;
 
+
 struct Coord{
   int x;
   int y;

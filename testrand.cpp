@@ -721,7 +721,7 @@ void deplaceTousRenard(Grille &g, Grille &g1){
                setAnimal(g1, temp2);
 	       setAnimal(g, temp2);
             }
-	  }	
+	  }
 	  else if (attaqueRenard2(g1, b) == false){
             el = voisinsEspece(g1, ec.point[i], Vide);
 //            cout << "Vide autour " << el.nbPoint << endl;
@@ -742,8 +742,8 @@ void deplaceTousRenard(Grille &g, Grille &g1){
 		     setAnimal(g, temp2);
                   }
 	          faimRenard(b);
-		
-	        } 
+
+	        }
           }
      }
   }
@@ -913,7 +913,7 @@ int main(){
   int compteur = 0;
 
   //while (trouveTousEspece(gg, Lapin).nbPoint != 0 and trouveTousEspece(gg, Renard).nbPoint != 0){
-  
+
   for (int i = 0; i < 3; i++){
   compteur++;
 
@@ -932,7 +932,7 @@ int main(){
   cout << "Nombre de renards : " << ecr2.nbPoint << endl;
   cout << endl;
   cout << "Compteur : " << compteur << endl;
- 
+
   }
 
     //Ens e = trouveTousEspece(gg,Lapin);

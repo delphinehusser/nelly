@@ -1,8 +1,8 @@
 
 #include <cstdlib>
 #include <iostream>
-#incude <fstream>
-#incude <stdexept>
+#include <fstream>
+#include <stdexcept>
 
 
 #include "enscoord.hpp"
@@ -67,26 +67,6 @@ void initialiseGrille(Grille &g){
     }
   }
 }
-
-
-/*void initialiseGrille(Grille &g){
-  int compteur;
-  for (int i = 0; i < GRILLE_TAILLE; i++){
-    for (int j = 0; j < GRILLE_TAILLE; j++) {
-      compteur = rand()%100;
-      if(compteur < 7){
-        g.caseG[i][j].quoi = Renard;
-        g.caseG[i][j].food = FoodInit;
-      } else if (compteur < 27){
-        g.caseG[i][j].quoi = Lapin;
-        g.caseG[i][j].food = 0;
-      } else if (compteur >= 27){
-        g.caseG[i][j].quoi = Vide;
-        g.caseG[i][j].food = -1;
-      }
-    }
-  }
-}*/
 
 
 // TROUVE LES CASES VOISINES D'UNE ESPECE D'UNE COORD //
@@ -155,36 +135,6 @@ void deplaceTousLapins(Grille &g, Grille &g1){
 }
 
 
-/*void deplaceTousLapins(Grille g, Grille &g1){
-  Ens ec = trouveTousEspece(g, Lapin);
-  Ens el = creerEc();
-  if (ec.nbPoint == 0){
-    return;
-  }
-  for (int i = 0; i < ec.nbPoint; i++){
-    Animal b = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
-    Animal temp = b;
-    el = voisinsEspece(g, ec.point[i], Vide);
-    if (el.nbPoint != 0){
-      deplaceAnimal(g1, b, el);
-      //g.caseG[getX(ec.point[i])][getY(ec.point[i])].quoi = Vide;
-      //cout << "Maintenant en ";
-      //afficheCoord(b.ou);
-    } else if (el.nbPoint == 0){
-      setAnimal(g1, b);
-    }
-
-    if (seReproduitAnimal(b, el.nbPoint) == false){
-      temp.quoi = Vide;
-      setAnimal(g, temp);
-      setAnimal(g1, temp);
-    } else if (seReproduitAnimal(b, el.nbPoint) == true){
-      setAnimal(g1, temp);
-    }
-    copieGrille(g, g1);
-  }
-}*/
-
 
 /*/void verifieGrille(Grille g, Espece e){
   Ens animaux = creerEc();
@@ -210,23 +160,6 @@ void tourRenard(Grille g, Grille &g1){
 
 
 
-// SE DEPLACE SUR L'EMPLACEMENT DU LAPIN, ET RETOURNE VRAI SI LE RENARD A MANGE LE LAPIN //
-
-/*bool attaqueRenard(Grille &g, Animal &a){
-  Ens ec = creerEc();
-  ec = voisinsEspece(g, a.ou, Lapin);
-  if (ec.nbPoint == 0){
-    ec = voisinsEspece(g, a.ou, Vide);
-    if (ec.nbPoint != 0){
-       deplaceAnimal(g, a, ec);
-    }
-    return false;
-  }
-  deplaceAnimal(g, a, ec);
-  mangeRenard(a);
-  return true;
-}*/
-
 // RETOURNE VRAI SI LE RENARD A MANGE LE LAPIN, FAUX SINON//
 bool attaqueRenard2(Grille g, Animal a){
   Ens ec = creerEc();
@@ -239,60 +172,6 @@ bool attaqueRenard2(Grille g, Animal a){
 
 
 
-/*void deplaceTousRenard(Grille g, Grille &g1){
-  Coord c = creerCoord(0,0);
-  Animal a = creerAnimal(Vide, creerCoord(0,0));
-  for (int i = 0; i < GRILLE_TAILLE; i++){
-    for (int j = 0; j < GRILLE_TAILLE; j++){
-      if (g.caseG[i][j].quoi == Renard){
-        c = creerCoord(i,j);
-        a = g.caseG[i][j];
-        getAnimal(g, c);
-        faimRenard(a);
-        if (mortAnimal(a) == true){
-          g1.caseG[i][j].quoi = Vide;
-          break;
-        }
-        attaqueRenard(g, a);
-        if (seReproduitAnimal(a, GRILLE_TAILLE) == true){
-          setAnimal(g1, a);
-        }
-      }
-    }
-  }
-}
-*/
-
-
-/*void deplaceTousLapins(Grille &g, Grille &g1){
-  Ens ec = trouveTousEspece(g, Lapin);
-  Ens el = creerEc();
-  if (ec.nbPoint == 0){
-    return;
-  }
-  for (int i = 0; i < ec.nbPoint; i++){
-    el = voisinsEspece(g, ec.point[i], Vide);
-    Animal b = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
-    bool a = seReproduitAnimal(b, el.nbPoint);
-    Animal temp = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
-      if(el.nbPoint == 0){
-        setAnimal(g1, b);
-      } else if (el.nbPoint != 0){
-        deplaceAnimal(g1, b, el);
-        setAnimal(g, b);
-        g.caseG[getX(ec.point[i])][getY(ec.point[i])].quoi = Vide;
-        if (a == true){
-          setAnimal(g1, temp);
-          setAnimal(g, temp);
-        } else {
-	  temp.quoi = Vide;
-	  setAnimal(g1, temp);
-	  setAnimal(g, temp);
-        }
-      }
-   }
-}*/
-
 
 
 void deplaceTousRenard(Grille &g, Grille &g1){
@@ -300,7 +179,7 @@ void deplaceTousRenard(Grille &g, Grille &g1){
   Ens el = creerEc();
   for (int i = 0; i < ec.nbPoint ; i++){
       Animal b = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
-      Animal temp = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
+     // Animal temp = g.caseG[getX(ec.point[i])][getY(ec.point[i])];
       if (mortAnimal(b) == true){
           Animal mort = creerAnimal(Vide, ec.point[i]);
           setAnimal(g1, mort);
@@ -321,7 +200,7 @@ void deplaceTousRenard(Grille &g, Grille &g1){
                setAnimal(g1, temp2);
 	       setAnimal(g, temp2);
             }
-	  }	
+	  }
 	  else if (attaqueRenard2(g1, b) == false){
             el = voisinsEspece(g1, ec.point[i], Vide);
 //            cout << "Vide autour " << el.nbPoint << endl;
@@ -342,8 +221,8 @@ void deplaceTousRenard(Grille &g, Grille &g1){
 		     setAnimal(g, temp2);
                   }
 	          faimRenard(b);
-		
-	        } 
+
+	        }
           }
      }
   }
@@ -408,5 +287,3 @@ void affichegrille(Grille g){
 			// fermeture du fichier //
 			fic.close();
 	}*/
-
-
